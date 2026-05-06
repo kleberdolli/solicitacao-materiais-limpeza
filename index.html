@@ -569,7 +569,7 @@
         add(section.toUpperCase(), 12, true, 16);
         items.forEach((item) => {
           const value = data[`item_${slug(item)}`] || "0";
-          if (Number(value) > 0) add(`${item}: ${value}`, 10);
+          add(`${item}: ${value || "0"}`, 10);
         });
         add("", 10, false, 8);
       });
