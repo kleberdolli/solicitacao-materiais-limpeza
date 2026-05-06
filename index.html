@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solicitação de Materiais de Limpeza - Palmeiras/BA</title>
+  <style>
+    :root {
+      --bg: #f4eef9;
+      --paper: #ffffff;
+      --ink: #271833;
+      --muted: #6f6078;
+      --primary: #7b2cbf;
+      --primary-dark: #4c176f;
+      --accent: #c77dff;
+      --sun: #f5c84c;
+      --water: #f2e4ff;
+      --line: #e5d7ee;
+      --soft: #fbf7ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(241, 196, 83, 0.22), transparent 26%),
+        radial-gradient(circle at 88% 10%, rgba(123, 44, 191, 0.16), transparent 26%),
+        linear-gradient(135deg, #f4eef9 0%, #fff9ef 48%, #efe4ff 100%);
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 14px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 4px 18px rgba(0, 45, 38, 0.10);
+    }
+
+    button {
+      min-height: 38px;
+      border: 1px solid var(--primary);
+      border-radius: 6px;
+      padding: 0 14px;
+      color: #ffffff;
+      background: var(--primary);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      color: var(--primary-dark);
+      background: #ffffff;
+    }
+
+    button.danger {
+      background: #9c2f2f;
+      border-color: #9c2f2f;
+    }
+
+    .status {
+      min-width: 170px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    main {
+      width: min(100%, 980px);
+      margin: 24px auto;
+      padding: 0 14px;
+    }
+
+    .sheet {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-top: 8px solid var(--primary);
+      border-radius: 8px;
+      box-shadow: 0 14px 40px rgba(0, 45, 38, 0.12);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 96px;
+      background:
+        linear-gradient(135deg, rgba(123, 44, 191, 0.14), rgba(199, 125, 255, 0.16), rgba(241, 196, 83, 0.10)),
+        repeating-linear-gradient(120deg, transparent 0 18px, rgba(76, 23, 111, 0.07) 18px 20px);
+      pointer-events: none;
+    }
+
+    header {
+      position: relative;
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+      text-align: left;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 92px;
+      height: 92px;
+      border: 2px solid var(--primary);
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: inset 0 0 0 5px #ffffff, 0 6px 18px rgba(76, 23, 111, 0.18);
+      overflow: hidden;
+    }
+
+    .brand-mark img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 3px;
+    }
+
+    .eyebrow {
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 25px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    section {
+      margin-top: 22px;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      padding: 9px 12px;
+      color: #ffffff;
+      background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--accent));
+      border-radius: 6px;
+      font-size: 15px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 5px;
+      color: var(--primary-dark);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 9px;
+      color: var(--ink);
+      background: #ffffff;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 127, 115, 0.12);
+    }
+
+    textarea {
+      min-height: 74px;
+      resize: vertical;
+    }
+
+    .materials {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px 14px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 1fr 92px;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(244, 250, 248, 0.96)),
+        var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .item span {
+      font-size: 14px;
+      line-height: 1.25;
+    }
+
+    .item input {
+      text-align: center;
+    }
+
+    .custom {
+      display: grid;
+      grid-template-columns: 1.4fr 100px 2fr;
+      gap: 10px;
+      padding: 12px;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+    }
+
+    .check {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--ink);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .check input {
+      width: 18px;
+      min-height: 18px;
+      margin-top: 1px;
+    }
+
+    @media (max-width: 760px) {
+      .sheet {
+        padding: 22px;
+      }
+
+      .grid,
+      .materials,
+      .custom {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .brand-mark {
+        margin: 0 auto;
+      }
+
+      .item {
+        grid-template-columns: 1fr 86px;
+      }
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 12mm;
+      }
+
+      body {
+        background: #ffffff;
+      }
+
+      .toolbar {
+        display: none;
+      }
+
+      main {
+        width: auto;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sheet {
+        border: 0;
+        box-shadow: none;
+        padding: 0;
+      }
+
+      h2 {
+        color: var(--ink);
+        background: transparent;
+        border: 1px solid var(--line);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button type="button" id="saveButton">Salvar dados</button>
+    <button type="button" class="secondary" id="pdfButton">Gerar PDF</button>
+    <button type="button" class="secondary" id="printButton">Imprimir</button>
+    <button type="button" class="danger" id="clearButton">Limpar</button>
+    <span class="status" id="status">Pronto para preencher.</span>
+  </div>
+
+  <main>
+    <form class="sheet" id="requestForm">
+      <header>
+        <div class="brand-mark" aria-hidden="true">
+          <img src="logo-educacao.png" alt="">
+        </div>
+        <div>
+          <div class="eyebrow">Prefeitura Municipal de Palmeiras - Bahia</div>
+          <h1>Solicitação de Materiais de Limpeza</h1>
+          <p class="subtitle">Preencha com base no estoque atual. Solicitações inconsistentes ou sem conferência poderão ser desconsideradas.</p>
+        </div>
+      </header>
+
+      <section>
+        <h2>Dados da Solicitação</h2>
+        <div class="grid">
+          <label>Nome da Escola
+            <input name="escola" autocomplete="organization">
+          </label>
+          <label>Responsável pela solicitação
+            <input name="responsavel" autocomplete="name">
+          </label>
+          <label>Data da Solicitação
+            <input type="date" name="data">
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Itens Principais</h2>
+        <div class="materials" data-section="Itens Principais"></div>
+      </section>
+
+      <section>
+        <h2>Luvas de Borracha</h2>
+        <div class="materials" data-section="Luvas de Borracha"></div>
+      </section>
+
+      <section>
+        <h2>Limpeza Complementar</h2>
+        <div class="materials" data-section="Limpeza Complementar"></div>
+      </section>
+
+      <section>
+        <h2>Higiene Pessoal</h2>
+        <div class="materials" data-section="Higiene Pessoal"></div>
+      </section>
+
+      <section>
+        <h2>Materiais não listados ou sugestões</h2>
+        <div class="custom">
+          <label>Material 1
+            <input name="extraNome1" placeholder="Nome do material">
+          </label>
+          <label>Quantidade
+            <input type="number" min="0" step="1" name="extraQtd1">
+          </label>
+          <label>Justificativa
+            <input name="extraJust1" placeholder="Motivo da solicitação">
+          </label>
+        </div>
+        <div class="custom" style="margin-top:10px">
+          <label>Material 2
+            <input name="extraNome2" placeholder="Nome do material">
+          </label>
+          <label>Quantidade
+            <input type="number" min="0" step="1" name="extraQtd2">
+          </label>
+          <label>Justificativa
+            <input name="extraJust2" placeholder="Motivo da solicitação">
+          </label>
+        </div>
+        <div class="custom" style="margin-top:10px">
+          <label>Material 3
+            <input name="extraNome3" placeholder="Nome do material">
+          </label>
+          <label>Quantidade
+            <input type="number" min="0" step="1" name="extraQtd3">
+          </label>
+          <label>Justificativa
+            <input name="extraJust3" placeholder="Motivo da solicitação">
+          </label>
+        </div>
+        <div class="custom" style="margin-top:10px">
+          <label>Material 4
+            <input name="extraNome4" placeholder="Nome do material">
+          </label>
+          <label>Quantidade
+            <input type="number" min="0" step="1" name="extraQtd4">
+          </label>
+          <label>Justificativa
+            <input name="extraJust4" placeholder="Motivo da solicitação">
+          </label>
+        </div>
+      </section>
+
+      <section>
+        <h2>Observações e Declaração</h2>
+        <label>Observações gerais
+          <textarea name="observacoes" placeholder="Informações complementares sobre estoque, avarias, demandas sazonais ou prazos críticos."></textarea>
+        </label>
+        <label class="check" style="margin-top:12px">
+          <input type="checkbox" name="declaracao">
+          <span>Declaro que conferi o estoque da unidade e que as informações prestadas neste formulário são verdadeiras.</span>
+        </label>
+      </section>
+    </form>
+  </main>
+
+  <script>
+    const materialSections = {
+      "Itens Principais": [
+        "Água Sanitária (litros)",
+        "Desinfetante (litros)",
+        "Sabão em Pó (kg ou pacotes)",
+        "Papel Higiênico (rolos ou pacotes)",
+        "Álcool Gel (frascos)",
+        "Sabonete Líquido (frascos ou refis)",
+        "Esponja Dupla Face (unidades)",
+        "Esponja de Aço (pacotes)",
+        "Pano de Chão (unidades)"
+      ],
+      "Luvas de Borracha": [
+        "Luvas P (pares)",
+        "Luvas M (pares)",
+        "Luvas G (pares)"
+      ],
+      "Limpeza Complementar": [
+        "Vassoura (unidades)",
+        "Rodo (unidades)",
+        "Balde (unidades)",
+        "Limpa Vidro (frascos)",
+        "Flanela (unidades)"
+      ],
+      "Higiene Pessoal": [
+        "Sabonete em Barra (unidades)",
+        "Shampoo (frascos)",
+        "Sabonete Líquido Infantil (frascos)",
+        "Fralda P (pacotes)",
+        "Fralda M (pacotes)",
+        "Fralda G (pacotes)",
+        "Fralda XG (pacotes)",
+        "Touca Descartável (unidades)"
+      ]
+    };
+
+    const form = document.querySelector("#requestForm");
+    const status = document.querySelector("#status");
+    const storageKey = "solicitacao-materiais-limpeza-palmeiras-v1";
+
+    function slug(text) {
+      return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9]+/g, "_").replace(/^_|_$/g, "").toLowerCase();
+    }
+
+    Object.entries(materialSections).forEach(([section, items]) => {
+      const container = document.querySelector(`[data-section="${section}"]`);
+      items.forEach((item) => {
+        const row = document.createElement("label");
+        row.className = "item";
+        row.innerHTML = `<span>${item}</span><input type="number" min="0" step="1" name="item_${slug(item)}" placeholder="0">`;
+        container.appendChild(row);
+      });
+    });
+
+    function fields() {
+      return [...form.querySelectorAll("input, textarea")];
+    }
+
+    function collectData() {
+      return Object.fromEntries(fields().map((field) => [field.name, field.type === "checkbox" ? field.checked : field.value]));
+    }
+
+    function applyData(data) {
+      fields().forEach((field) => {
+        if (!Object.prototype.hasOwnProperty.call(data, field.name)) return;
+        if (field.type === "checkbox") field.checked = Boolean(data[field.name]);
+        else field.value = data[field.name];
+      });
+    }
+
+    function setStatus(message) {
+      status.textContent = message;
+      window.clearTimeout(setStatus.timer);
+      setStatus.timer = window.setTimeout(() => {
+        status.textContent = "Pronto para preencher.";
+      }, 2800);
+    }
+
+    function saveData() {
+      localStorage.setItem(storageKey, JSON.stringify(collectData()));
+      setStatus("Dados salvos neste navegador.");
+    }
+
+    function clearData() {
+      if (!confirm("Limpar todos os campos?")) return;
+      fields().forEach((field) => {
+        if (field.type === "checkbox") field.checked = false;
+        else field.value = "";
+      });
+      localStorage.removeItem(storageKey);
+      setStatus("Formulário limpo.");
+    }
+
+    function pdfEscape(text) {
+      return String(text || "").replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)").replace(/\r?\n/g, " ");
+    }
+
+    function wrapText(text, maxChars) {
+      const words = String(text || "").split(/\s+/).filter(Boolean);
+      const lines = [];
+      let line = "";
+      words.forEach((word) => {
+        const test = line ? `${line} ${word}` : word;
+        if (test.length > maxChars && line) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = test;
+        }
+      });
+      if (line) lines.push(line);
+      return lines.length ? lines : [""];
+    }
+
+    function buildPdfLines() {
+      const data = collectData();
+      const lines = [];
+      const add = (text = "", size = 10, bold = false, gap = 13) => lines.push({ text, size, bold, gap });
+      const wrapped = (text, size = 10, max = 86) => wrapText(text, max).forEach((line) => add(line, size));
+
+      add("PREFEITURA MUNICIPAL DE PALMEIRAS - BAHIA", 13, true, 17);
+      add("SOLICITACAO DE MATERIAIS DE LIMPEZA", 16, true, 22);
+      add(`Escola: ${data.escola}`, 10);
+      add(`Responsavel: ${data.responsavel}`, 10);
+      add(`Data: ${data.data}`, 10, false, 20);
+
+      Object.entries(materialSections).forEach(([section, items]) => {
+        add(section.toUpperCase(), 12, true, 16);
+        items.forEach((item) => {
+          const value = data[`item_${slug(item)}`] || "0";
+          if (Number(value) > 0) add(`${item}: ${value}`, 10);
+        });
+        add("", 10, false, 8);
+      });
+
+      add("MATERIAIS NAO LISTADOS OU SUGESTOES", 12, true, 16);
+      [1, 2, 3, 4].forEach((index) => {
+        const nome = data[`extraNome${index}`];
+        const qtd = data[`extraQtd${index}`];
+        const just = data[`extraJust${index}`];
+        if (nome || qtd || just) wrapped(`${index}. ${nome || ""} - Quantidade: ${qtd || ""} - Justificativa: ${just || ""}`);
+      });
+      add("", 10, false, 8);
+
+      add("OBSERVACOES", 12, true, 16);
+      wrapped(data.observacoes, 10, 86);
+      add("", 10, false, 12);
+      add(data.declaracao ? "Declaracao marcada: informacoes conferidas e verdadeiras." : "Declaracao nao marcada.", 10);
+      add("", 10, false, 26);
+      add("________________________________________", 10);
+      add("Assinatura do responsavel", 9);
+      return lines;
+    }
+
+    function loadLogoForPdf() {
+      return new Promise((resolve) => {
+        const image = new Image();
+        image.onload = () => {
+          const size = 96;
+          const canvas = document.createElement("canvas");
+          canvas.width = size;
+          canvas.height = size;
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, size, size);
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(size / 2, size / 2, 43, 0, Math.PI * 2);
+          ctx.clip();
+          const scale = Math.min(size / image.width, size / image.height) * 0.95;
+          const width = image.width * scale;
+          const height = image.height * scale;
+          ctx.drawImage(image, (size - width) / 2, (size - height) / 2, width, height);
+          ctx.restore();
+          ctx.strokeStyle = "#7b2cbf";
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.arc(size / 2, size / 2, 43, 0, Math.PI * 2);
+          ctx.stroke();
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
+          resolve({
+            binary: atob(dataUrl.split(",")[1]),
+            height: size,
+            width: size
+          });
+        };
+        image.onerror = () => resolve(null);
+        image.src = "logo-educacao.png";
+      });
+    }
+
+    async function createPdf() {
+      const logo = await loadLogoForPdf();
+      const content = [];
+      content.push("0.957 0.933 0.976 rg 0 0 595 842 re f");
+      content.push("0.482 0.173 0.749 RG 2 w 32 32 531 778 re S");
+      if (logo) {
+        content.push("q 76 0 0 76 474 724 cm /Im1 Do Q");
+      }
+      let y = 790;
+      buildPdfLines().forEach((line) => {
+        if (y < 45) return;
+        const font = line.bold ? "/F2" : "/F1";
+        content.push(`BT ${font} ${line.size} Tf 0.153 0.094 0.2 rg 42 ${y} Td (${pdfEscape(line.text)}) Tj ET`);
+        y -= line.gap;
+      });
+
+      const stream = content.join("\n");
+      const imageResource = logo ? " /XObject << /Im1 7 0 R >>" : "";
+      const objects = [
+        "<< /Type /Catalog /Pages 2 0 R >>",
+        "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R /F2 5 0 R >>${imageResource} >> /Contents 6 0 R >>`,
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>",
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>",
+        `<< /Length ${stream.length} >>\nstream\n${stream}\nendstream`
+      ];
+      if (logo) {
+        objects.push(`<< /Type /XObject /Subtype /Image /Width ${logo.width} /Height ${logo.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${logo.binary.length} >>\nstream\n${logo.binary}\nendstream`);
+      }
+      let pdf = "%PDF-1.4\n";
+      const offsets = [0];
+      objects.forEach((object, index) => {
+        offsets.push(pdf.length);
+        pdf += `${index + 1} 0 obj\n${object}\nendobj\n`;
+      });
+      const xref = pdf.length;
+      pdf += `xref\n0 ${objects.length + 1}\n0000000000 65535 f \n`;
+      offsets.slice(1).forEach((offset) => {
+        pdf += `${String(offset).padStart(10, "0")} 00000 n \n`;
+      });
+      pdf += `trailer\n<< /Size ${objects.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF`;
+
+      const bytes = new Uint8Array(pdf.length);
+      for (let i = 0; i < pdf.length; i += 1) bytes[i] = pdf.charCodeAt(i) & 255;
+      const blob = new Blob([bytes], { type: "application/pdf" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "solicitacao-materiais-limpeza.pdf";
+      link.click();
+      URL.revokeObjectURL(url);
+      setStatus("PDF gerado.");
+    }
+
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      try {
+        applyData(JSON.parse(saved));
+      } catch {
+        localStorage.removeItem(storageKey);
+      }
+    }
+
+    fields().forEach((field) => {
+      field.addEventListener("input", () => localStorage.setItem(storageKey, JSON.stringify(collectData())));
+      field.addEventListener("change", () => localStorage.setItem(storageKey, JSON.stringify(collectData())));
+    });
+
+    document.querySelector("#saveButton").addEventListener("click", saveData);
+    document.querySelector("#pdfButton").addEventListener("click", createPdf);
+    document.querySelector("#printButton").addEventListener("click", () => window.print());
+    document.querySelector("#clearButton").addEventListener("click", clearData);
+  </script>
+</body>
+</html>
