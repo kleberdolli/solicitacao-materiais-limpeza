@@ -174,7 +174,7 @@
     header {
       position: relative;
       display: grid;
-      grid-template-columns: 128px 1fr;
+      grid-template-columns: 132px 1fr;
       gap: 18px;
       align-items: center;
       margin: 0;
@@ -195,12 +195,12 @@
     .brand-mark {
       display: grid;
       place-items: center;
-      width: 128px;
-      height: 128px;
+      width: 132px;
+      height: 132px;
       border: 2px solid rgba(196, 164, 255, 0.55);
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 10px 28px rgba(111, 63, 214, 0.28), inset 0 0 0 5px rgba(255, 255, 255, 0.92);
+      box-shadow: 0 10px 28px rgba(111, 63, 214, 0.28), inset 0 0 0 3px rgba(255, 255, 255, 0.92);
       overflow: hidden;
     }
 
@@ -208,7 +208,7 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      padding: 8px;
+      padding: 2px;
     }
 
     .eyebrow {
@@ -952,7 +952,7 @@
           ctx.beginPath();
           ctx.arc(size / 2, size / 2, 43, 0, Math.PI * 2);
           ctx.clip();
-          const scale = Math.min(size / image.width, size / image.height) * 0.94;
+          const scale = Math.min(size / image.width, size / image.height) * 0.98;
           const width = image.width * scale;
           const height = image.height * scale;
           ctx.drawImage(image, (size - width) / 2, (size - height) / 2, width, height);
