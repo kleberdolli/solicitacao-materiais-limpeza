@@ -22,6 +22,10 @@
       --amber: #e8b86d;
       --rose: #d49bb8;
       --glow: rgba(155, 109, 255, 0.28);
+      --surface-section: rgba(33, 36, 53, 0.9);
+      --surface-section-top: rgba(38, 41, 60, 0.92);
+      --surface-card: rgba(13, 14, 22, 0.94);
+      --surface-input: rgba(8, 8, 14, 0.96);
       --print-ink: #1a1224;
       --print-line: #d8cfe8;
     }
@@ -38,7 +42,7 @@
         radial-gradient(circle at 14% 0%, rgba(95, 212, 240, 0.1), transparent 30%),
         radial-gradient(circle at 86% 8%, rgba(242, 154, 111, 0.07), transparent 28%),
         radial-gradient(circle at 50% 100%, rgba(155, 109, 255, 0.12), transparent 36%),
-        linear-gradient(165deg, #050509 0%, #0a0910 46%, #101018 100%);
+        linear-gradient(165deg, #030308 0%, #07070d 46%, #0b0b12 100%);
       min-height: 100vh;
     }
 
@@ -136,7 +140,7 @@
       position: relative;
       overflow: hidden;
       padding: 36px;
-      background: linear-gradient(180deg, rgba(132, 96, 196, 0.1), rgba(10, 9, 15, 0.82));
+      background: linear-gradient(180deg, rgba(132, 96, 196, 0.08), rgba(7, 7, 12, 0.9));
       border: 1px solid rgba(196, 164, 255, 0.22);
       border-radius: 24px;
       box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(196, 164, 255, 0.08), 0 0 48px rgba(155, 109, 255, 0.14);
@@ -280,16 +284,36 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin: 0 0 14px;
+      margin: 0;
       padding: 13px 16px;
       color: #ffffff;
       background: linear-gradient(90deg, rgba(var(--theme-a), 0.94), rgba(var(--theme-b), 0.78));
       border: 1px solid var(--theme-border);
-      border-radius: 14px;
+      border-radius: 16px 16px 0 0;
       font-size: 15px;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       box-shadow: 0 10px 24px var(--theme-glow);
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-body {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      background:
+        linear-gradient(180deg, var(--surface-section-top), var(--surface-section)),
+        linear-gradient(180deg, rgba(var(--theme-a), 0.06), transparent 42%);
+      border: 1px solid var(--theme-border);
+      border-top: 0;
+      border-radius: 0 0 18px 18px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.04),
+        inset 0 14px 28px rgba(0, 0, 0, 0.16),
+        0 10px 24px rgba(0, 0, 0, 0.14);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
 
     h2::before {
@@ -315,13 +339,6 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      padding: 18px;
-      background: linear-gradient(180deg, rgba(var(--theme-a), 0.14), rgba(10, 9, 15, 0.72));
-      border: 1px solid var(--theme-border);
-      border-radius: 18px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
     }
 
     label {
@@ -340,7 +357,7 @@
       border-radius: 12px;
       padding: 10px 12px;
       color: var(--ink);
-      background: rgba(6, 6, 11, 0.78);
+      background: var(--surface-input);
       font: inherit;
       outline: none;
       transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
@@ -354,7 +371,7 @@
     .section input:focus,
     .section textarea:focus {
       border-color: rgba(var(--theme-b), 0.72);
-      background: rgba(14, 13, 20, 0.92);
+      background: rgba(10, 10, 16, 0.98);
       box-shadow: 0 0 0 3px rgba(var(--theme-b), 0.16), 0 0 18px rgba(var(--theme-b), 0.14);
     }
 
@@ -375,10 +392,10 @@
       gap: 12px;
       align-items: center;
       padding: 12px 14px;
-      background: linear-gradient(180deg, rgba(var(--theme-a), 0.14), rgba(10, 9, 15, 0.78));
-      border: 1px solid var(--theme-border);
+      background: linear-gradient(180deg, rgba(var(--theme-a), 0.08), var(--surface-card));
+      border: 1px solid rgba(var(--theme-b), 0.18);
       border-radius: 14px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 18px rgba(0, 0, 0, 0.18);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
@@ -395,7 +412,7 @@
       font-weight: 700;
       font-variant-numeric: tabular-nums;
       color: #ffffff;
-      background: rgba(4, 4, 8, 0.88);
+      background: rgba(5, 5, 10, 0.98);
       border-color: rgba(var(--theme-b), 0.34);
       box-shadow: inset 0 0 0 1px rgba(var(--theme-b), 0.08);
     }
@@ -410,9 +427,10 @@
       grid-template-columns: 1.4fr 100px 2fr;
       gap: 12px;
       padding: 16px;
-      background: linear-gradient(180deg, rgba(var(--theme-a), 0.12), rgba(10, 9, 15, 0.78));
-      border: 1px solid var(--theme-border);
+      background: linear-gradient(180deg, rgba(var(--theme-a), 0.07), var(--surface-card));
+      border: 1px solid rgba(var(--theme-b), 0.18);
       border-radius: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 18px rgba(0, 0, 0, 0.16);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
@@ -423,11 +441,12 @@
       font-variant-numeric: tabular-nums;
     }
 
-    .section-obs > label:not(.check) {
+    .section-obs .obs-panel {
       padding: 16px;
-      background: linear-gradient(180deg, rgba(var(--theme-a), 0.12), rgba(10, 9, 15, 0.78));
-      border: 1px solid var(--theme-border);
+      background: linear-gradient(180deg, rgba(var(--theme-a), 0.07), var(--surface-card));
+      border: 1px solid rgba(var(--theme-b), 0.18);
       border-radius: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 18px rgba(0, 0, 0, 0.16);
     }
 
     .check {
@@ -438,9 +457,10 @@
       color: rgba(248, 246, 255, 0.96);
       font-weight: 400;
       line-height: 1.5;
-      background: linear-gradient(180deg, rgba(var(--theme-b), 0.12), rgba(10, 9, 15, 0.78));
-      border: 1px solid var(--theme-border);
+      background: linear-gradient(180deg, rgba(var(--theme-b), 0.08), var(--surface-card));
+      border: 1px solid rgba(var(--theme-b), 0.18);
       border-radius: 16px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 8px 18px rgba(0, 0, 0, 0.16);
     }
 
     .check input {
@@ -513,11 +533,12 @@
       .sheet,
       .sheet::before,
       header,
+      .section-body,
       .grid,
       .item,
       .custom,
       .check,
-      .section-obs > label:not(.check) {
+      .section-obs .obs-panel {
         background: #ffffff !important;
         box-shadow: none !important;
         backdrop-filter: none !important;
@@ -557,6 +578,7 @@
         color: var(--print-ink);
         background: transparent;
         border: 1px solid var(--print-line);
+        border-radius: 0;
         box-shadow: none;
       }
 
@@ -572,11 +594,12 @@
         box-shadow: none;
       }
 
+      .section-body,
       .grid,
       .item,
       .custom,
       .check,
-      .section-obs > label:not(.check) {
+      .section-obs .obs-panel {
         border: 1px solid var(--print-line);
       }
     }
@@ -606,41 +629,52 @@
 
       <section class="section section-dados">
         <h2>Dados da Solicitação</h2>
-        <div class="grid">
-          <label>Nome da Escola
-            <input name="escola" autocomplete="organization">
-          </label>
-          <label>Responsável pela solicitação
-            <input name="responsavel" autocomplete="name">
-          </label>
-          <label>Data da Solicitação
-            <input type="date" name="data">
-          </label>
+        <div class="section-body">
+          <div class="grid">
+            <label>Nome da Escola
+              <input name="escola" autocomplete="organization">
+            </label>
+            <label>Responsável pela solicitação
+              <input name="responsavel" autocomplete="name">
+            </label>
+            <label>Data da Solicitação
+              <input type="date" name="data">
+            </label>
+          </div>
         </div>
       </section>
 
       <section class="section section-itens">
         <h2>Itens Principais</h2>
-        <div class="materials" data-section="Itens Principais"></div>
+        <div class="section-body">
+          <div class="materials" data-section="Itens Principais"></div>
+        </div>
       </section>
 
       <section class="section section-luvas">
         <h2>Luvas de Borracha</h2>
-        <div class="materials" data-section="Luvas de Borracha"></div>
+        <div class="section-body">
+          <div class="materials" data-section="Luvas de Borracha"></div>
+        </div>
       </section>
 
       <section class="section section-complementar">
         <h2>Limpeza Complementar</h2>
-        <div class="materials" data-section="Limpeza Complementar"></div>
+        <div class="section-body">
+          <div class="materials" data-section="Limpeza Complementar"></div>
+        </div>
       </section>
 
       <section class="section section-higiene">
         <h2>Higiene Pessoal</h2>
-        <div class="materials" data-section="Higiene Pessoal"></div>
+        <div class="section-body">
+          <div class="materials" data-section="Higiene Pessoal"></div>
+        </div>
       </section>
 
       <section class="section section-extras">
         <h2>Materiais não listados ou sugestões</h2>
+        <div class="section-body">
         <div class="custom">
           <label>Material 1
             <input name="extraNome1" placeholder="Nome do material">
@@ -652,7 +686,7 @@
             <input name="extraJust1" placeholder="Motivo da solicitação">
           </label>
         </div>
-        <div class="custom" style="margin-top:10px">
+        <div class="custom">
           <label>Material 2
             <input name="extraNome2" placeholder="Nome do material">
           </label>
@@ -663,7 +697,7 @@
             <input name="extraJust2" placeholder="Motivo da solicitação">
           </label>
         </div>
-        <div class="custom" style="margin-top:10px">
+        <div class="custom">
           <label>Material 3
             <input name="extraNome3" placeholder="Nome do material">
           </label>
@@ -674,7 +708,7 @@
             <input name="extraJust3" placeholder="Motivo da solicitação">
           </label>
         </div>
-        <div class="custom" style="margin-top:10px">
+        <div class="custom">
           <label>Material 4
             <input name="extraNome4" placeholder="Nome do material">
           </label>
@@ -685,17 +719,20 @@
             <input name="extraJust4" placeholder="Motivo da solicitação">
           </label>
         </div>
+        </div>
       </section>
 
       <section class="section section-obs">
         <h2>Observações e Declaração</h2>
-        <label>Observações gerais
-          <textarea name="observacoes" placeholder="Informações complementares sobre estoque, avarias, demandas sazonais ou prazos críticos."></textarea>
-        </label>
-        <label class="check" style="margin-top:12px">
-          <input type="checkbox" name="declaracao">
-          <span>Declaro que conferi o estoque da unidade e que as informações prestadas neste formulário são verdadeiras.</span>
-        </label>
+        <div class="section-body">
+          <label class="obs-panel">Observações gerais
+            <textarea name="observacoes" placeholder="Informações complementares sobre estoque, avarias, demandas sazonais ou prazos críticos."></textarea>
+          </label>
+          <label class="check">
+            <input type="checkbox" name="declaracao">
+            <span>Declaro que conferi o estoque da unidade e que as informações prestadas neste formulário são verdadeiras.</span>
+          </label>
+        </div>
       </section>
     </form>
   </main>
