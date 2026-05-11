@@ -653,7 +653,7 @@
   <div class="toolbar">
     <button type="button" class="btn-save" id="saveButton">Salvar dados</button>
     <button type="button" class="btn-pdf" id="pdfButton">Gerar PDF</button>
-    <button type="button" class="btn-share" id="shareButton">↗ Compartilhar</button>
+    <button type="button" class="btn-share" id="shareButton">Compartilhar App</button>
     <button type="button" class="btn-print" id="printButton">Imprimir</button>
     <button type="button" class="btn-clear" id="clearButton">Limpar</button>
     <span class="status" id="status">Pronto para preencher.</span>
@@ -1036,114 +1036,44 @@
       setStatus("PDF gerado.");
     }
 
-    function buildShareSummary() {
-      const data = collectData();
-      const lines = [
-        "Solicitação de Materiais de Limpeza",
-        "Prefeitura Municipal de Palmeiras - BA",
-        "",
-        `Escola: ${data.escola || "(não informado)"}`,
-        `Responsável: ${data.responsavel || "(não informado)"}`,
-        `Data: ${data.data || "(não informada)"}`,
-        ""
-      ];
-
-      Object.entries(materialSections).forEach(([section, items]) => {
-        const sectionLines = items
-          .map((item) => {
-            const value = data[`item_${slug(item)}`];
-            if (!value || value === "0") return "";
-            return `- ${item}: ${value}`;
-          })
-          .filter(Boolean);
-        if (sectionLines.length) {
-          lines.push(section, ...sectionLines, "");
-        }
-      });
-
-      const extras = [1, 2, 3, 4]
-        .map((index) => {
-          const nome = data[`extraNome${index}`];
-          const qtd = data[`extraQtd${index}`];
-          const just = data[`extraJust${index}`];
-          if (!nome && !qtd && !just) return "";
-          return `- ${nome || "Material extra"}: ${qtd || "0"}${just ? ` (${just})` : ""}`;
-        })
-        .filter(Boolean);
-      if (extras.length) {
-        lines.push("Materiais não listados ou sugestões", ...extras, "");
-      }
-
-      if (data.observacoes) {
-        lines.push("Observações", data.observacoes, "");
-      }
-
-      lines.push(data.declaracao ? "Declaração marcada." : "Declaração não marcada.");
-      return lines.join("\n").trim();
-    }
-
-    function canShareData(shareData) {
-      return typeof navigator.canShare === "function" && navigator.canShare(shareData);
-    }
-
-    async function copyShareSummary(text) {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(text);
-        return true;
-      }
-      const area = document.createElement("textarea");
-      area.value = text;
-      area.setAttribute("readonly", "");
-      area.style.position = "fixed";
-      area.style.left = "-9999px";
-      document.body.appendChild(area);
-      area.select();
-      const copied = document.execCommand("copy");
-      document.body.removeChild(area);
-      return copied;
-    }
-
     async function shareRequest() {
-      const title = "Solicitação de Materiais de Limpeza";
-      const text = buildShareSummary();
+      const shareData = {
+        title: "Solicitação de Materiais de Limpeza",
+        text: "Acesse o formulário de solicitação de materiais de limpeza.",
+        url: window.location.href
+      };
 
-      if (navigator.share) {
-        try {
-          const pdfBlob = await buildPdfBlob();
-          const file = new File([pdfBlob], "solicitacao-materiais-limpeza.pdf", { type: "application/pdf" });
-          const withFile = { title, text, files: [file] };
-          if (canShareData(withFile)) {
-            await navigator.share(withFile);
-            setStatus("Compartilhado com sucesso.");
-            return;
-          }
-          const textOnly = { title, text };
-          if (canShareData(textOnly)) {
-            await navigator.share(textOnly);
-            setStatus("Compartilhado com sucesso.");
-            return;
-          }
-          await navigator.share(textOnly);
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
           setStatus("Compartilhado com sucesso.");
           return;
-        } catch (error) {
-          if (error && error.name === "AbortError") return;
         }
-      }
 
-      try {
-        if (await copyShareSummary(text)) {
-          setStatus("Texto copiado para a área de transferência.");
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(window.location.href);
+          setStatus("Link do app copiado para a área de transferência.");
           return;
         }
-      } catch {
-        // segue para o fallback com PDF
-      }
 
-      try {
-        downloadPdfBlob(await buildPdfBlob());
-        setStatus("PDF gerado. Envie o arquivo manualmente.");
-      } catch {
+        const area = document.createElement("textarea");
+        area.value = window.location.href;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        document.body.appendChild(area);
+        area.select();
+        const copied = document.execCommand("copy");
+        document.body.removeChild(area);
+        if (copied) {
+          setStatus("Link do app copiado para a área de transferência.");
+          return;
+        }
+
+        setStatus("Compartilhamento não suportado neste dispositivo.");
+      } catch (error) {
+        if (error && error.name === "AbortError") return;
+        console.error("Erro ao compartilhar:", error);
         setStatus("Compartilhamento não suportado neste dispositivo.");
       }
     }
