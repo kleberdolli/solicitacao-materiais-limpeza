@@ -6,20 +6,22 @@
   <title>Solicitação de Materiais de Limpeza - Palmeiras/BA</title>
   <style>
     :root {
-      --bg-deep: #0b0a10;
-      --bg-mid: #14121c;
+      --bg-deep: #06060b;
+      --bg-mid: #101018;
       --glass: rgba(132, 96, 196, 0.14);
-      --glass-strong: rgba(118, 82, 188, 0.22);
       --glass-border: rgba(196, 164, 255, 0.34);
       --glass-border-soft: rgba(196, 164, 255, 0.18);
-      --ink: #f5f2ff;
-      --muted: #c8bfe0;
+      --ink: #f8f6ff;
+      --muted: #d4cceb;
       --primary: #9b6dff;
       --primary-dark: #6f3fd6;
-      --accent: #d8b8ff;
+      --accent: #e2c9ff;
+      --cyan: #5fd4f0;
+      --cyan-soft: rgba(95, 212, 240, 0.22);
+      --coral: #f29a6f;
+      --amber: #e8b86d;
+      --rose: #d49bb8;
       --glow: rgba(155, 109, 255, 0.28);
-      --danger: #d45f6a;
-      --danger-dark: #a63f49;
       --print-ink: #1a1224;
       --print-line: #d8cfe8;
     }
@@ -33,9 +35,10 @@
       color: var(--ink);
       font-family: "Segoe UI", Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at 12% 8%, rgba(155, 109, 255, 0.18), transparent 28%),
-        radial-gradient(circle at 88% 12%, rgba(111, 63, 214, 0.16), transparent 30%),
-        linear-gradient(160deg, #0b0a10 0%, #12101a 48%, #171322 100%);
+        radial-gradient(circle at 14% 0%, rgba(95, 212, 240, 0.1), transparent 30%),
+        radial-gradient(circle at 86% 8%, rgba(242, 154, 111, 0.07), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(155, 109, 255, 0.12), transparent 36%),
+        linear-gradient(165deg, #050509 0%, #0a0910 46%, #101018 100%);
       min-height: 100vh;
     }
 
@@ -49,47 +52,72 @@
       justify-content: center;
       flex-wrap: wrap;
       padding: 16px 18px;
-      background: rgba(18, 16, 26, 0.78);
-      border-bottom: 1px solid var(--glass-border-soft);
-      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35), 0 0 24px var(--glow);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(12, 11, 18, 0.84);
+      border-bottom: 1px solid rgba(196, 164, 255, 0.16);
+      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.42), 0 0 28px rgba(95, 212, 240, 0.08);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     button {
       min-height: 42px;
-      border: 1px solid rgba(216, 184, 255, 0.45);
       border-radius: 12px;
       padding: 0 16px;
       color: #ffffff;
-      background: linear-gradient(135deg, #8f5dff 0%, #6f3fd6 52%, #5a2eb8 100%);
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 8px 22px rgba(111, 63, 214, 0.28);
-      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, filter 0.16s ease;
     }
 
     button:hover {
       transform: translateY(-1px);
-      box-shadow: 0 10px 26px rgba(155, 109, 255, 0.34);
-      border-color: rgba(232, 210, 255, 0.65);
     }
 
-    button.secondary {
+    button:focus-visible {
+      outline: 2px solid rgba(95, 212, 240, 0.72);
+      outline-offset: 2px;
+    }
+
+    .btn-save {
+      border: 1px solid rgba(196, 164, 255, 0.5);
+      background: linear-gradient(135deg, #9b6dff 0%, #6f3fd6 48%, #3f7fd8 100%);
+      box-shadow: 0 10px 24px rgba(111, 63, 214, 0.3), 0 0 18px rgba(95, 212, 240, 0.14);
+    }
+
+    .btn-save:hover {
+      box-shadow: 0 12px 28px rgba(111, 63, 214, 0.36), 0 0 22px rgba(95, 212, 240, 0.22);
+    }
+
+    .btn-pdf {
+      border: 1px solid rgba(143, 173, 255, 0.45);
+      background: linear-gradient(135deg, #7f5dff 0%, #5a4fd6 52%, #3f7fd8 100%);
+      box-shadow: 0 10px 24px rgba(90, 79, 214, 0.28);
+    }
+
+    .btn-pdf:hover {
+      box-shadow: 0 12px 28px rgba(90, 79, 214, 0.36), 0 0 20px rgba(95, 212, 240, 0.18);
+    }
+
+    .btn-print {
       color: var(--ink);
-      background: rgba(20, 18, 28, 0.72);
-      border-color: var(--glass-border);
-      box-shadow: inset 0 0 0 1px rgba(155, 109, 255, 0.12);
+      border: 1px solid rgba(196, 164, 255, 0.28);
+      background: linear-gradient(180deg, rgba(24, 22, 34, 0.92), rgba(14, 13, 20, 0.92));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 8px 20px rgba(0, 0, 0, 0.28);
     }
 
-    button.secondary:hover {
-      background: rgba(132, 96, 196, 0.18);
+    .btn-print:hover {
+      border-color: rgba(95, 212, 240, 0.42);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 24px rgba(95, 212, 240, 0.12);
     }
 
-    button.danger {
-      background: linear-gradient(135deg, #d45f6a 0%, #a63f49 100%);
-      border-color: rgba(255, 176, 186, 0.45);
-      box-shadow: 0 8px 22px rgba(166, 63, 73, 0.28);
+    .btn-clear {
+      border: 1px solid rgba(255, 186, 164, 0.42);
+      background: linear-gradient(135deg, #f29a6f 0%, #d45f6a 58%, #b84a54 100%);
+      box-shadow: 0 10px 24px rgba(212, 95, 106, 0.26);
+    }
+
+    .btn-clear:hover {
+      box-shadow: 0 12px 28px rgba(212, 95, 106, 0.34), 0 0 18px rgba(242, 154, 111, 0.16);
     }
 
     .status {
@@ -108,22 +136,22 @@
       position: relative;
       overflow: hidden;
       padding: 36px;
-      background: linear-gradient(180deg, rgba(132, 96, 196, 0.12), rgba(20, 18, 28, 0.72));
-      border: 1px solid var(--glass-border);
-      border-radius: 22px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.42), 0 0 0 1px rgba(196, 164, 255, 0.08), 0 0 40px var(--glow);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(132, 96, 196, 0.1), rgba(10, 9, 15, 0.82));
+      border: 1px solid rgba(196, 164, 255, 0.22);
+      border-radius: 24px;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.48), 0 0 0 1px rgba(196, 164, 255, 0.08), 0 0 48px rgba(155, 109, 255, 0.14);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .sheet::before {
       content: "";
       position: absolute;
       inset: 0 0 auto 0;
-      height: 120px;
+      height: 128px;
       background:
-        linear-gradient(135deg, rgba(155, 109, 255, 0.16), rgba(111, 63, 214, 0.08), transparent 72%),
-        radial-gradient(circle at 18% 0%, rgba(216, 184, 255, 0.14), transparent 42%);
+        linear-gradient(135deg, rgba(155, 109, 255, 0.14), rgba(95, 212, 240, 0.06), transparent 72%),
+        radial-gradient(circle at 18% 0%, rgba(232, 184, 109, 0.08), transparent 42%);
       pointer-events: none;
     }
 
@@ -133,12 +161,12 @@
       grid-template-columns: 92px 1fr;
       gap: 18px;
       align-items: center;
-      margin-bottom: 28px;
-      padding: 20px;
-      background: rgba(132, 96, 196, 0.1);
-      border: 1px solid var(--glass-border-soft);
-      border-radius: 18px;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      margin-bottom: 30px;
+      padding: 22px;
+      background: linear-gradient(135deg, rgba(132, 96, 196, 0.14), rgba(20, 18, 28, 0.72));
+      border: 1px solid rgba(196, 164, 255, 0.2);
+      border-radius: 20px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 12px 28px rgba(0, 0, 0, 0.22);
       text-align: left;
     }
 
@@ -164,52 +192,134 @@
 
     .eyebrow {
       color: var(--accent);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
     }
 
     h1 {
-      margin: 6px 0 0;
-      color: var(--ink);
-      font-size: 28px;
-      line-height: 1.15;
+      margin: 8px 0 0;
+      color: #ffffff;
+      font-size: 30px;
+      line-height: 1.12;
       letter-spacing: -0.02em;
+      text-shadow: 0 0 24px rgba(155, 109, 255, 0.18);
     }
 
     .subtitle {
-      margin: 8px 0 0;
-      color: var(--muted);
+      margin: 10px 0 0;
+      color: rgba(212, 204, 235, 0.92);
       font-size: 14px;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    section {
-      margin-top: 28px;
+    .section {
+      --theme-a: 155, 109, 255;
+      --theme-b: 155, 109, 255;
+      --theme-border: rgba(196, 164, 255, 0.22);
+      --theme-panel: rgba(132, 96, 196, 0.12);
+      --theme-glow: rgba(155, 109, 255, 0.16);
+      --theme-label: #e2c9ff;
+      margin-top: 30px;
+    }
+
+    .section-dados {
+      --theme-a: 147, 104, 230;
+      --theme-b: 176, 132, 255;
+    }
+
+    .section-itens {
+      --theme-a: 155, 109, 255;
+      --theme-b: 95, 212, 240;
+    }
+
+    .section-luvas {
+      --theme-a: 126, 118, 214;
+      --theme-b: 164, 150, 255;
+      --theme-label: #d8d2ff;
+    }
+
+    .section-complementar {
+      --theme-a: 72, 176, 214;
+      --theme-b: 95, 212, 240;
+      --theme-border: rgba(95, 212, 240, 0.24);
+      --theme-panel: rgba(72, 176, 214, 0.12);
+      --theme-glow: rgba(95, 212, 240, 0.16);
+      --theme-label: #b8ecff;
+    }
+
+    .section-higiene {
+      --theme-a: 196, 132, 176;
+      --theme-b: 212, 155, 184;
+      --theme-border: rgba(212, 155, 184, 0.24);
+      --theme-panel: rgba(196, 132, 176, 0.12);
+      --theme-glow: rgba(212, 155, 184, 0.16);
+      --theme-label: #f0cddd;
+    }
+
+    .section-extras {
+      --theme-a: 232, 184, 109;
+      --theme-b: 242, 154, 111;
+      --theme-border: rgba(232, 184, 109, 0.24);
+      --theme-panel: rgba(232, 184, 109, 0.1);
+      --theme-glow: rgba(232, 184, 109, 0.14);
+      --theme-label: #ffe0b8;
+    }
+
+    .section-obs {
+      --theme-a: 214, 176, 255;
+      --theme-b: 232, 184, 109;
+      --theme-border: rgba(214, 176, 255, 0.24);
+      --theme-panel: rgba(214, 176, 255, 0.1);
+      --theme-glow: rgba(232, 184, 109, 0.12);
+      --theme-label: #f1ddff;
     }
 
     h2 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       margin: 0 0 14px;
-      padding: 12px 16px;
+      padding: 13px 16px;
       color: #ffffff;
-      background: linear-gradient(90deg, rgba(90, 46, 184, 0.92), rgba(143, 93, 255, 0.88), rgba(196, 164, 255, 0.72));
-      border: 1px solid rgba(216, 184, 255, 0.28);
+      background: linear-gradient(90deg, rgba(var(--theme-a), 0.94), rgba(var(--theme-b), 0.78));
+      border: 1px solid var(--theme-border);
       border-radius: 14px;
       font-size: 15px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
-      box-shadow: 0 10px 24px rgba(111, 63, 214, 0.22);
+      box-shadow: 0 10px 24px var(--theme-glow);
     }
+
+    h2::before {
+      display: inline-grid;
+      place-items: center;
+      width: 1.55em;
+      height: 1.55em;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      font-size: 0.82em;
+      line-height: 1;
+    }
+
+    .section-dados h2::before { content: "◎"; }
+    .section-itens h2::before { content: "✦"; }
+    .section-luvas h2::before { content: "◈"; }
+    .section-complementar h2::before { content: "◆"; }
+    .section-higiene h2::before { content: "○"; }
+    .section-extras h2::before { content: "+"; }
+    .section-obs h2::before { content: "✎"; }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
       padding: 18px;
-      background: var(--glass);
-      border: 1px solid var(--glass-border-soft);
+      background: linear-gradient(180deg, rgba(var(--theme-a), 0.14), rgba(10, 9, 15, 0.72));
+      border: 1px solid var(--theme-border);
       border-radius: 18px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
@@ -217,7 +327,7 @@
     label {
       display: grid;
       gap: 7px;
-      color: var(--accent);
+      color: var(--theme-label, var(--accent));
       font-size: 13px;
       font-weight: 700;
     }
@@ -226,11 +336,11 @@
     textarea {
       width: 100%;
       min-height: 40px;
-      border: 1px solid var(--glass-border-soft);
+      border: 1px solid rgba(196, 164, 255, 0.16);
       border-radius: 12px;
       padding: 10px 12px;
       color: var(--ink);
-      background: rgba(11, 10, 16, 0.62);
+      background: rgba(6, 6, 11, 0.78);
       font: inherit;
       outline: none;
       transition: border-color 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
@@ -241,11 +351,11 @@
       color: rgba(200, 191, 224, 0.72);
     }
 
-    input:focus,
-    textarea:focus {
-      border-color: rgba(216, 184, 255, 0.72);
-      background: rgba(20, 18, 28, 0.88);
-      box-shadow: 0 0 0 3px rgba(155, 109, 255, 0.18), 0 0 18px rgba(155, 109, 255, 0.12);
+    .section input:focus,
+    .section textarea:focus {
+      border-color: rgba(var(--theme-b), 0.72);
+      background: rgba(14, 13, 20, 0.92);
+      box-shadow: 0 0 0 3px rgba(var(--theme-b), 0.16), 0 0 18px rgba(var(--theme-b), 0.14);
     }
 
     textarea {
@@ -265,8 +375,8 @@
       gap: 12px;
       align-items: center;
       padding: 12px 14px;
-      background: linear-gradient(180deg, rgba(132, 96, 196, 0.16), rgba(20, 18, 28, 0.72));
-      border: 1px solid var(--glass-border-soft);
+      background: linear-gradient(180deg, rgba(var(--theme-a), 0.14), rgba(10, 9, 15, 0.78));
+      border: 1px solid var(--theme-border);
       border-radius: 14px;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
       backdrop-filter: blur(10px);
@@ -279,8 +389,20 @@
       line-height: 1.35;
     }
 
-    .item input {
+    .item input[type="number"] {
+      min-height: 42px;
       text-align: center;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      color: #ffffff;
+      background: rgba(4, 4, 8, 0.88);
+      border-color: rgba(var(--theme-b), 0.34);
+      box-shadow: inset 0 0 0 1px rgba(var(--theme-b), 0.08);
+    }
+
+    .item input[type="number"]:focus {
+      border-color: rgba(var(--theme-b), 0.78);
+      box-shadow: 0 0 0 3px rgba(var(--theme-b), 0.16), 0 0 16px rgba(var(--theme-b), 0.16);
     }
 
     .custom {
@@ -288,11 +410,24 @@
       grid-template-columns: 1.4fr 100px 2fr;
       gap: 12px;
       padding: 16px;
-      background: linear-gradient(180deg, rgba(132, 96, 196, 0.14), rgba(20, 18, 28, 0.72));
-      border: 1px solid var(--glass-border-soft);
+      background: linear-gradient(180deg, rgba(var(--theme-a), 0.12), rgba(10, 9, 15, 0.78));
+      border: 1px solid var(--theme-border);
       border-radius: 16px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
+    }
+
+    .custom input[type="number"] {
+      text-align: center;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .section-obs > label:not(.check) {
+      padding: 16px;
+      background: linear-gradient(180deg, rgba(var(--theme-a), 0.12), rgba(10, 9, 15, 0.78));
+      border: 1px solid var(--theme-border);
+      border-radius: 16px;
     }
 
     .check {
@@ -300,11 +435,11 @@
       gap: 12px;
       align-items: flex-start;
       padding: 16px;
-      color: var(--ink);
+      color: rgba(248, 246, 255, 0.96);
       font-weight: 400;
       line-height: 1.5;
-      background: rgba(132, 96, 196, 0.1);
-      border: 1px solid var(--glass-border-soft);
+      background: linear-gradient(180deg, rgba(var(--theme-b), 0.12), rgba(10, 9, 15, 0.78));
+      border: 1px solid var(--theme-border);
       border-radius: 16px;
     }
 
@@ -312,7 +447,7 @@
       width: 18px;
       min-height: 18px;
       margin-top: 2px;
-      accent-color: var(--primary);
+      accent-color: rgb(var(--theme-b));
     }
 
     @media (max-width: 760px) {
@@ -381,7 +516,8 @@
       .grid,
       .item,
       .custom,
-      .check {
+      .check,
+      .section-obs > label:not(.check) {
         background: #ffffff !important;
         box-shadow: none !important;
         backdrop-filter: none !important;
@@ -414,6 +550,7 @@
       h1,
       .subtitle {
         color: var(--print-ink);
+        text-shadow: none;
       }
 
       h2 {
@@ -421,6 +558,10 @@
         background: transparent;
         border: 1px solid var(--print-line);
         box-shadow: none;
+      }
+
+      h2::before {
+        display: none;
       }
 
       input,
@@ -434,7 +575,8 @@
       .grid,
       .item,
       .custom,
-      .check {
+      .check,
+      .section-obs > label:not(.check) {
         border: 1px solid var(--print-line);
       }
     }
@@ -442,10 +584,10 @@
 </head>
 <body>
   <div class="toolbar">
-    <button type="button" id="saveButton">Salvar dados</button>
-    <button type="button" class="secondary" id="pdfButton">Gerar PDF</button>
-    <button type="button" class="secondary" id="printButton">Imprimir</button>
-    <button type="button" class="danger" id="clearButton">Limpar</button>
+    <button type="button" class="btn-save" id="saveButton">Salvar dados</button>
+    <button type="button" class="btn-pdf" id="pdfButton">Gerar PDF</button>
+    <button type="button" class="btn-print" id="printButton">Imprimir</button>
+    <button type="button" class="btn-clear" id="clearButton">Limpar</button>
     <span class="status" id="status">Pronto para preencher.</span>
   </div>
 
@@ -462,7 +604,7 @@
         </div>
       </header>
 
-      <section>
+      <section class="section section-dados">
         <h2>Dados da Solicitação</h2>
         <div class="grid">
           <label>Nome da Escola
@@ -477,27 +619,27 @@
         </div>
       </section>
 
-      <section>
+      <section class="section section-itens">
         <h2>Itens Principais</h2>
         <div class="materials" data-section="Itens Principais"></div>
       </section>
 
-      <section>
+      <section class="section section-luvas">
         <h2>Luvas de Borracha</h2>
         <div class="materials" data-section="Luvas de Borracha"></div>
       </section>
 
-      <section>
+      <section class="section section-complementar">
         <h2>Limpeza Complementar</h2>
         <div class="materials" data-section="Limpeza Complementar"></div>
       </section>
 
-      <section>
+      <section class="section section-higiene">
         <h2>Higiene Pessoal</h2>
         <div class="materials" data-section="Higiene Pessoal"></div>
       </section>
 
-      <section>
+      <section class="section section-extras">
         <h2>Materiais não listados ou sugestões</h2>
         <div class="custom">
           <label>Material 1
@@ -545,7 +687,7 @@
         </div>
       </section>
 
-      <section>
+      <section class="section section-obs">
         <h2>Observações e Declaração</h2>
         <label>Observações gerais
           <textarea name="observacoes" placeholder="Informações complementares sobre estoque, avarias, demandas sazonais ou prazos críticos."></textarea>
